@@ -1,4 +1,4 @@
-class TweetCriteria:
+class TweetCriteria(object):
 	
 	def __init__(self):
 		self.maxTweets = 0
@@ -21,8 +21,8 @@ class TweetCriteria:
 		return self
 	
 	def setHashtagSearch(self, hashtagSearch):
-                self.hashtagSearch = hashtagSearch
-                return self
+		self.hashtagSearch = hashtagSearch
+		return self
 		
 	def setMaxTweets(self, maxTweets):
 		self.maxTweets = maxTweets
