@@ -1,0 +1,4 @@
+include *.txt *.py *.rst
+recursive-include stock_crawler *.tar.gz *.txt *.py 
+recursive-include twitter_analyzer *.tar.gz *.txt *.py
+recursive-include twitter_crawler *.tar.gz *.txt *.py

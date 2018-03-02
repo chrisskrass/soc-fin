@@ -1,2 +1,4 @@
-# -e git://github.com/kilinco/GetOldTweets-python.git#egg=get_old_tweets
-googlefinance.client
+lxml
+pyquery
+pandas
+
