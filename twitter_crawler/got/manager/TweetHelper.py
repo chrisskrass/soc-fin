@@ -75,7 +75,6 @@ class TweetHelper:
 		'''
 		assert isinstance(tweetCriteria, TweetCriteria) 
 		assert isinstance(cookieJar, cookielib.CookieJar)
-		assert isinstance(refreshCursor, str)
 		if proxy != None:
 			assert isinstance(proxy, str)
 			
