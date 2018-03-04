@@ -1,3 +1,20 @@
+'''
+Important readme. 
+
+Rules for sentiment data files: 
+1. File Name
+- Expected file name format: "/pathto/CompanyName_Sentiment_year-month-day.csv'
+- Example file name: "/pathto/TESLA_Sentiment_1996-01-01.csv'
+- Only file name's date is allowed to change from .csv to next.
+- Ensure file name date corresponds with data (it will be used to generate date_range)
+2. Columns
+- CSV file columns must follow: text,dates,retweets,favorites,negative,neutral,positive,compound
+
+Rules for stock data files:
+1. First column should be "Unnamed: 0" 
+
+'''
+
 import pandas as pd
 import numpy as np
 from datetime import datetime # Used to convert strings (in sentiment analysis) to type Datetimeindex 
