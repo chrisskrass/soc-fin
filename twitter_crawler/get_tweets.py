@@ -67,20 +67,37 @@ def get_tweets_united_airlines():
 
 # Example Two
 def get_tweets_tesla():
-	"""Get the tweets on Tesla 10000 per day, from 2018-01-29 to 2017-02-07 and save as .cvs files.
+	"""Get the tweets on Tesla 10000 per day, from 2018-02-02 to 2018-02-11 and save as .cvs files.
 		:input: None
 	    :type: None
 	    :return: None
 	    :type: None
 	"""
-	date_Day = ['01-29', '01-30', '01-31', '02-01', '02-02', '02-03', '02-04', '02-05', '02-06', '02-07', '02-08']
+	date_Day = ['02-02', '02-03', '02-04', '02-05', '02-06', '02-07', '02-08', '02-09', '02-10', '02-11', '02-12']
 	for date_DD in xrange(10):
 		tweet_criteria = manager.TweetCriteria()
-		tweet_criteria.setQuerySearch("United Airlines").setSince("2018-" 
+		tweet_criteria.setQuerySearch("Tesla").setSince("2018-" 
 			+ date_Day[date_DD]).setUntil("2018-" + date_Day[date_DD + 1]).setMaxTweets(10000)
 		tweets = manager.TweetManager().getTweets(tweet_criteria)
 		manager.TweetHelper().getCSV(tweets, 'TESLA_'+ "2018-" + date_Day[date_DD] + '.csv')
 
+# Example Three
+def get_tweets_snapchat():
+	"""Get the tweets on Snapchat 10000 per day, from 2018-02-21 to 2018-03-02 and save as .cvs files.
+		:input: None
+	    :type: None
+	    :return: None
+	    :type: None
+	"""
+	date_Day = ['02-21', '02-22', '02-23', '02-24', '02-02', '02-25', '02-26', '02-27', '02-28', '03-01', '03-02']
+	for date_DD in xrange(10):
+		tweet_criteria = manager.TweetCriteria()
+		tweet_criteria.setQuerySearch("Snapchat").setSince("2018-" 
+			+ date_Day[date_DD]).setUntil("2018-" + date_Day[date_DD + 1]).setMaxTweets(10000)
+		tweets = manager.TweetManager().getTweets(tweet_criteria)
+		manager.TweetHelper().getCSV(tweets, 'SNAPCHAT_'+ "2018-" + date_Day[date_DD] + '.csv')
+
 if __name__ == '__main__':
-	get_tweets_united_airlines()
+	# get_tweets_united_airlines()
 	get_tweets_tesla()
+	get_tweets_snapchat()

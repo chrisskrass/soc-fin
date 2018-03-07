@@ -96,8 +96,8 @@ def get_sentiment_tesla():
     """
     fields = ['date', 'retweets', 'favorites', 'text'] # files to read
     # get any desird day as you want
-    date_Day = ['01-29', '01-30', '01-31', '02-01', '02-02', '02-03',\
-     '02-04', '02-05', '02-06', '02-07', '02-08'] 
+    date_Day = ['02-02', '02-03', '02-04', '02-05', '02-06',\
+     '02-07', '02-08', '02-09', '02-10', '02-11', '02-12']
     for date_DD in xrange(10):
         csv_input = pd.read_csv('TESLA_'+ "2018-" + date_Day[date_DD] 
           + '.csv', skipinitialspace=True, usecols=fields)
@@ -122,6 +122,43 @@ def get_sentiment_tesla():
         csv_input.to_csv('TESLA_Sentiment_'+ "2018-" + date_Day[date_DD] 
           + '.csv', index=False)
 
-get_sentiment_unitedairlines() # call get_sentiment_unitedairlines
+def get_sentiment_snap():
+    """Get the sentiment analysis on tweets on Tesla 10000 per day, 
+    from 2018-01-29 to 2017-02-07 and save as .cvs files.
+        :input: None
+        :type: None
+        :return: None
+        :type: None
+    """
+    fields = ['date', 'retweets', 'favorites', 'text'] # files to read
+    # get any desird day as you want
+    date_Day = ['02-21', '02-22', '02-23', '02-24', '02-02', '02-25', \
+    '02-26', '02-27', '02-28', '03-01', '03-02']
+    for date_DD in xrange(10):
+        csv_input = pd.read_csv('SNAPCHAT_'+ "2018-" + date_Day[date_DD] 
+          + '.csv', skipinitialspace=True, usecols=fields)
+
+        analyzer = SentimentIntensityAnalyzer()
+        sentiment_neg = []
+        sentiment_neu = []
+        sentiment_pos = []
+        sentiment_compound = []
+
+        for sentence in csv_input.text:
+            sentiment_single = analyzer.polarity_scores(str(sentence))
+            sentiment_neg.append(sentiment_single['neg'])
+            sentiment_neu.append(sentiment_single['neu'])
+            sentiment_pos.append(sentiment_single['pos'])
+            sentiment_compound.append(sentiment_single['compound'])
+
+        csv_input['negative'] = sentiment_neg
+        csv_input['neutral'] = sentiment_neu
+        csv_input['positive'] = sentiment_pos
+        csv_input['compound'] = sentiment_compound
+        csv_input.to_csv('SNAPCHAT_Sentiment_'+ "2018-" + date_Day[date_DD] 
+          + '.csv', index=False)
+
+# get_sentiment_unitedairlines() # call get_sentiment_unitedairlines
 get_sentiment_tesla() # call get_sentiment_tesla
+get_sentiment_snap()
 
