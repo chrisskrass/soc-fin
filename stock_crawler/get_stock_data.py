@@ -72,6 +72,13 @@ param_Tesla = {
 	'p': "5Y" # Period (Ex: "1Y" = 1 year)
 }
 
+param_Snapchat = {
+	'q': "SNAP", # Stock symbol (ex: "AAPL")
+	'i': "86400", # Interval size in seconds ("86400" = 1 day intervals)
+	'x': "NYSE", # Stock exchange symbol on which stock is traded (ex: "NASD")
+	'p': "5Y" # Period (Ex: "1Y" = 1 year)
+}
 # call get_stock_data to get desired stock data
 get_stock_data(param_UA) 
 get_stock_data(param_Tesla)
+get_stock_data(param_Snapchat)
