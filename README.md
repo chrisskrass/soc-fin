@@ -1,9 +1,9 @@
 # ECE180_Winter2018_Group8
 
-A friendly list for grader -- Files for grading:
+***A friendly list for grader -- Files for grading:
 twitter_crawler/get_tweets.py
 twitter_analyzer/get_sentiment_data.py
-stock_crawler/get_stock_data.py
+stock_crawler/get_stock_data.py***
 
 ## Introduction
 
@@ -22,9 +22,9 @@ Key Events:
 1. Data Acquisition & Preprocessing:
 
 	get stock data
-	      |
+	      
 	get twitter data
-	      |
+	      
 	sentiment analyze on twitter data
 
 2. Data Visulization:
