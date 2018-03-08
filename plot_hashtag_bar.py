@@ -21,9 +21,20 @@ def plotHashtags(filename, savePng=True):
     col_number = df.shape[1]
     row_number = df.shape[0]
 
+    #print hasthag counts to console
+#     for i in df.ix[y]:
+#         print i
+
+
     data = [[] for i in range(col_number)]
     col_number2=str(col_number-2)
 
+    temp=[]
+    for row in df.iterrows():
+        index, data = row
+        temp.append(data.tolist())
+ 
+    
     xDates = df['date']
     data=[]
     data_numer=[]
@@ -53,11 +64,21 @@ def plotHashtags(filename, savePng=True):
     plt.gcf().subplots_adjust(bottom=0.15)
     plt.xticks(range(10),xDates)       
     plt.xticks(rotation=30)
+    plt.ylabel('number of tweets')
+    plt.xlabel('date')
  
- 	# if set, save as png
+    height = 2000
+    for i in temp:
+        plt.text(10,height,i)
+        height = height-200
+
+    
+
+     # if set, save as png
     if savePng:
         plt.savefig(filename+'.png')
     plt.show();
+    return
 
 plotHashtags('United_Airlines_Popular_Hashtags_2017-04-04_to_2017-04-13.csv', True)
 
