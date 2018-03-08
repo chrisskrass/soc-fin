@@ -46,9 +46,4 @@ semtiment_data
 
 
 ## Data Visulization
-
-
-
-
-
-
+Visualizaiton Functions are written in Visulization.ipynb, plot.py and piechart.py
