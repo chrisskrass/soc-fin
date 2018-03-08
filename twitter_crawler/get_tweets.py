@@ -2,28 +2,30 @@
 # -*- coding: utf-8 -*-
 # Author: Haotian Zhang (AlexHtZhang)
 
-'''This is an example on using the twitter_crawler to get specific desired data. Get the 
-tweets on United Airlines 10000 per day, from 2017-04-04 to 2017-04-14 and save as .cvs files. Get the tweets on Tesla 10000 
-per day, from 2018-01-29 to 2017-02-07 and save as .cvs files.
+'''This is an example on using the twitter_crawler to get specific desired data and save them into .csv files.
 
 Function(s):
-	get_tweets_united_airlines():
-		"""Get the tweets on United Airlines 10000 per day, from 2017-04-04 to 2017-04-14 
-		and save as .cvs files.
-			:input: None
-		    :type: None
-		    :return: None
-		    :type: None
-		"""	
+	get_tweets( search_query, company_name, date_list, max_tweets_perday):
+		"""Get the tweets on sepecified company from company_name and search key word from search_query, 
+		in the duration of date_list, in the amount of tweets as max_tweets_perday and save as .cvs files
+		for data of each single day in the name fashion of company_name+data.csv.
 
-	get_tweets_tesla():
-		"""Get the tweets on Tesla 10000 per day, from 2018-01-29 to 2017-02-07 and save 
-		as .cvs files.
-			:input: None
-		    :type: None
+		Note: The input parameter date_list should follow the YYYY-MM-DD format. For example: ['2018-02-02', 
+		'2018-02-03', '2018-02-04'] The last day is inclusive in the result but required, so if you want to 
+		get the data for only one desired day, you still need input the string of the day after that day.
+
+			:input: search_query
+		    :type: string
+		    :input: company_name
+		    :type: string
+			:input: date_list
+		    :type: list of string(s)
+			:input: max_tweets_perday
+		    :type: int
 		    :return: None
 		    :type: None
-		"""	
+		"""
+
 
 Requrements:
 python 2.7.14.final.0
@@ -45,59 +47,58 @@ LOCALE: None.None
 '''
 
 import sys
-assert sys.version_info[0] < 3
+assert sys.version_info[0] < 3 # assure the python version smaller than 3.0
 from got import manager
 import csv
 
-# Example One
-def get_tweets_united_airlines():
-	"""Get the tweets on United Airlines 10000 per day, from 2017-04-04 to 2017-04-14 and save as .cvs files.
-		:input: None
-	    :type: None
+
+def get_tweets( search_query, company_name, date_list, max_tweets_perday):
+	"""Get the tweets on sepecified company from company_name and search key word from search_query, 
+	in the duration of date_list, in the amount of tweets as max_tweets_perday and save as .cvs files
+	for data of each single day in the name fashion of company_name+data.csv.
+
+	Note: The input parameter date_list should follow the YYYY-MM-DD format. For example: ['2018-02-02', 
+	'2018-02-03', '2018-02-04'] The last day is inclusive in the result but required.
+
+		:input: search_query
+	    :type: string
+	    :input: company_name
+	    :type: string
+		:input: date_list
+	    :type: list of string(s)
+		:input: max_tweets_perday
+	    :type: int
 	    :return: None
 	    :type: None
 	"""
-	date_Day = ['04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '15']
-	for date_DD in xrange(10):
-		tweet_criteria = manager.TweetCriteria()
-		tweet_criteria.setQuerySearch("United Airlines").setSince("2017-04-" 
-			+ date_Day[date_DD]).setUntil("2017-04-" + date_Day[date_DD + 1]).setMaxTweets(10000)
-		tweets = manager.TweetManager().getTweets(tweet_criteria)
-		manager.TweetHelper().getCSV(tweets, 'United_Airlines_'+ "2017-04-" + date_Day[date_DD] + '.csv')
+	assert isinstance(search_query, str) # input search_query should be str
+	assert isinstance(company_name, str) # input company_name should be str
+	assert isinstance(date_list, list) # input date_list should be list
+	assert isinstance(max_tweets_perday, int) # input max_tweets_perday should be int
 
-# Example Two
-def get_tweets_tesla():
-	"""Get the tweets on Tesla 10000 per day, from 2018-02-02 to 2018-02-11 and save as .cvs files.
-		:input: None
-	    :type: None
-	    :return: None
-	    :type: None
-	"""
-	date_Day = ['02-02', '02-03', '02-04', '02-05', '02-06', '02-07', '02-08', '02-09', '02-10', '02-11', '02-12']
-	for date_DD in xrange(10):
-		tweet_criteria = manager.TweetCriteria()
-		tweet_criteria.setQuerySearch("Tesla").setSince("2018-" 
-			+ date_Day[date_DD]).setUntil("2018-" + date_Day[date_DD + 1]).setMaxTweets(10000)
-		tweets = manager.TweetManager().getTweets(tweet_criteria)
-		manager.TweetHelper().getCSV(tweets, 'TESLA_'+ "2018-" + date_Day[date_DD] + '.csv')
+	assert len(date_list) > 1 # input date_list should have length greater than one, last date is inclusive.
+	assert all(map(lambda i:isinstance(i,str), date_list)) # input date_list should be a list of str
 
-# Example Three
-def get_tweets_snapchat():
-	"""Get the tweets on Snapchat 10000 per day, from 2018-02-21 to 2018-03-02 and save as .cvs files.
-		:input: None
-	    :type: None
-	    :return: None
-	    :type: None
-	"""
-	date_Day = ['02-21', '02-22', '02-23', '02-24', '02-02', '02-25', '02-26', '02-27', '02-28', '03-01', '03-02']
-	for date_DD in xrange(10):
+	date_Day = date_list
+	for date_DD in xrange(len(date_Day) - 1):
 		tweet_criteria = manager.TweetCriteria()
-		tweet_criteria.setQuerySearch("Snapchat").setSince("2018-" 
-			+ date_Day[date_DD]).setUntil("2018-" + date_Day[date_DD + 1]).setMaxTweets(10000)
+		tweet_criteria.setQuerySearch(search_query).setSince(
+			date_Day[date_DD]).setUntil(date_Day[date_DD + 1]).setMaxTweets(max_tweets_perday)
 		tweets = manager.TweetManager().getTweets(tweet_criteria)
-		manager.TweetHelper().getCSV(tweets, 'SNAPCHAT_'+ "2018-" + date_Day[date_DD] + '.csv')
+		manager.TweetHelper().getCSV(tweets, company_name + '_'+ date_Day[date_DD] + '.csv')
 
-if __name__ == '__main__':
-	# get_tweets_united_airlines()
-	get_tweets_tesla()
-	get_tweets_snapchat()
+	return
+
+# Example usage of get_tweets
+get_tweets( 'example', 'example', ['2018-02-18', '2018-02-19'], 1)
+
+# get tweets for our intrest
+get_tweets( 'United Airlines', 'United_Airlines', ['2017-04-04', '2017-04-05', '2017-04-06', '2017-04-07', \
+	'2017-04-08', '2017-04-09', '2017-04-10', '2017-04-11', '2017-04-12', '2017-04-13', '2017-04-15'], 10000)
+get_tweets( 'Snapchat', 'SNAPCHAT', ['2018-02-17', '2018-02-18', '2018-02-19',  '2018-02-20', '2018-02-21', \
+	'2018-02-22', '2018-02-23', '2018-02-24', '2018-02-25', '2018-02-26', '2018-02-27', '2018-02-28'], 10000)
+get_tweets( 'Tesla', 'TESLA', ['2018-02-02', '2018-02-03', '2018-02-04', '2018-02-05', '2018-02-06', \
+	'2018-02-07', '2018-02-08', '2018-02-09', '2018-02-10', '2018-02-11', '2018-02-12'], 10000)
+
+
+get_tweets( 'Snapchat', 'SNAPCHAT', [ '2018-02-17', '2018-02-18', '2018-02-19',  '2018-02-20',  '2018-02-21'], 10000)
