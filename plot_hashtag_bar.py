@@ -64,7 +64,7 @@ def plotHashtags(filename, savePng=True):
     plt.gcf().subplots_adjust(bottom=0.15)
     plt.xticks(range(10),xDates)       
     plt.xticks(rotation=30)
-    plt.ylabel('number of tweets')
+    plt.ylabel('number of hashtags')
     plt.xlabel('date')
  
     height = 2000
