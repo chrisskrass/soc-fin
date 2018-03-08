@@ -1,0 +1,113 @@
+'''
+Important readme. 
+
+Rules for sentiment data files: 
+1. File Name
+- Expected file name format: "/pathto/CompanyName_Sentiment_year-month-day.csv'
+- Example file name: "/pathto/TESLA_Sentiment_1996-01-01.csv'
+- Only file name's date is allowed to change from .csv to next.
+- Ensure file name date corresponds with data (it will be used to generate date_range)
+2. Columns
+- CSV file columns must follow: text,dates,retweets,favorites,negative,neutral,positive,compound
+
+Rules for stock data files:
+1. First column should be "Unnamed: 0" 
+
+'''
+
+import pandas as pd
+import numpy as np
+from datetime import datetime # Used to convert strings (in sentiment analysis) to type Datetimeindex 
+
+#See example code at bottom. 
+
+def extract_subset(start_date, num_days, data):
+    '''
+    data: type DataFrame. Index should be DateTime. 
+    start_date: type str. Format: "year-month-day"
+    num_days: type int. Number of days from start_date
+    
+    Returns a DataFrame subset (all columns) from start_date to start_date + num_days
+    '''
+    assert isinstance(start_date,str)
+    assert isinstance(num_days,int)
+    assert isinstance(data,pd.DataFrame)
+    desired_start_date = pd.to_datetime(start_date).date()
+    desired_end_date = (desired_start_date+pd.DateOffset(days=num_days)).date()
+    data_subset = data.loc[desired_start_date:desired_end_date]
+    print "data subset\n", data_subset
+    return data_subset
+
+def compile_sentiments_df(file_path,number_csv_files):
+    '''
+    This script will automatically compile data from subsequently dated .csv files. 
+    
+    file_path: Type str. Path to the first sentiment file. 
+    - Expected input format: "/pathto/CompanyName_Sentiment_year-month-day.csv'
+    - Example input format: "/pathto/TESLA_Sentiment_1996-01-01.csv'
+    number_csv_files: Type int. Specify total number of csv sentiment files
+    - Note file names must be consistent, with only the date changing from file to file. 
+    
+    Returns: DataFrame of daily averaged sentiments with dates as index. 
+    
+    Rules for sentiment data files: 
+    1. Maintain file name in accordance to file_path described above. Only file name's date is allowed to change from .csv to next.
+    2. Ensure file name date corresponds with data (it will be used to generate date_range)
+    3. CSV file columns must follow: text,dates,retweets,favorites,negative,neutral,positive,compound
+    
+    '''
+    assert isinstance(file_path,str)
+    assert isinstance(number_csv_files,int)
+    assert number_csv_files > 0
+
+    import re # Regular expressions
+    
+    
+    # Parse string only.  
+    parsed_file_name = file_path.split('/')[-1].split('_') # Get data contained in the file name
+    parsed_file_name = {"Company Name":parsed_file_name[0], "Type of Data":parsed_file_name[1], "Date":parsed_file_name[2].split('.')[0]}
+    
+    date_start = parsed_file_name["Date"] # Gets date from file name for auto file parsing
+    build_compounds = []
+    
+    for items in pd.date_range(date_start, periods=number_csv_files+1, freq='24H'):
+        file_path = re.sub(r'\d\d\d\d-\d\d-\d\d', items.strftime('%Y-%m-%d'), file_path)
+        try:
+            temp_df = pd.read_csv(file_path,sep=',')
+            build_compounds.append(temp_df['compound'].mean())
+        except IOError:
+            if len(build_compounds) == 0:
+                raise IOError("File not found. Please check your file path input.")
+            else:
+                print "Reached end of files. Success!"
+            date_end = file_path.split('/')[-1].split('_')[2].split('.')[0]
+
+    build_dates = pd.date_range(date_start, periods=number_csv_files, freq='24H')
+    return pd.DataFrame(index = build_dates, data = build_compounds, columns = ["Sentiments"])
+    
+
+def compile_stock_df(file_path,df_to_concat): 
+    '''
+    file_path: Type str. 
+    df_to_concat: Type DataFrame. Data to concat stocks with. 
+    
+    Rules for stock data files:
+    1. First column should be "Unnamed: 0" 
+    
+    Returns a DataFrame object with stock data merged with df_to_concat. 
+    '''
+    assert isinstance(file_path,str)
+    assert isinstance(df_to_concat,pd.DataFrame), "Is your input a DataFrame instance?"
+    
+    #Concatenate with stock prices 
+    temp_df = pd.read_csv(file_path,sep=',')
+    temp_df.rename(columns = {'Unnamed: 0':'Date'},inplace=True) # Reassign 1st column to index
+    temp_df.set_index('Date', inplace = True)
+    temp_df.index = pd.to_datetime(temp_df.index).date
+    return pd.concat([df_to_concat,temp_df], axis=1)
+
+
+#Example code
+sentiments_df = compile_sentiments_df('~/Sentiment_Data/TESLA_Sentiment_2018-01-29.csv',10)
+entire_df = compile_stock_df('~/stock_data/TESLA_stock_data/TSLA_86400_NASDAQ_5Y.csv', sentiments_df)
+plot_df(extract_subset('2018-01-29',10,entire_df),"TESLA")
