@@ -10,12 +10,17 @@ It's developed and tested in python 2.7.
 	
 	$ git clone https://github.com/pdevty/googlefinance-client-python.git
 	$ cd googlefinance-client-python
-      $ python setup install
+    $ python setup install
 
 ## Usage
 
 ```
-Use 'get_stock_data.py'
+Please make sure you install the package in the right way.
+To use 'get_stock_data.py' to get the google stock data. Based on input parameter get price data 
+(return pandas dataframe) and save as csv file, just follow the following examples.
+
+python
+from googlefinance.client import get_price_data, get_prices_data, get_prices_time_data
 
 # United Airlines
 param_UA = {
@@ -33,9 +38,18 @@ param_Tesla = {
 'p': "5Y" # Period (Ex: "1Y" = 1 year)
 }
 
+param_Snapchat = {
+	'q': "SNAP", # Stock symbol (ex: "AAPL")
+	'i': "86400", # Interval size in seconds ("86400" = 1 day intervals)
+	'x': "NYSE", # Stock exchange symbol on which stock is traded (ex: "NASD")
+	'p': "5Y" # Period (Ex: "1Y" = 1 year)
+}
+
+
 # call get_stock_data to get desired stock data
-get_stock_data(param_UA)
+get_stock_data(param_UA) 
 get_stock_data(param_Tesla)
+get_stock_data(param_Snapchat)
 
 
 python
@@ -58,5 +72,18 @@ print(df)
 # 2016-05-20 05:00:00  17514.16  17514.16  17331.07   17435.4   95531058
 # 2016-05-21 05:00:00  17437.32  17571.75  17437.32  17500.94  111992332
 # ...                       ...       ...       ...       ...        ...
+```
 
+## Environment
 
+This program was developed and tested under following environments:
+python: 2.7.14.final.0
+python-bits: 64
+OS: Darwin
+OS-release: 16.7.0
+machine: x86_64
+processor: i386
+byteorder: little
+LC_ALL: None
+LANG: en_US.UTF-8
+LOCALE: None.None

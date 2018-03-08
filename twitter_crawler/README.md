@@ -1,7 +1,8 @@
 # Get Old Tweets Programatically
 A project written in Python to get old tweets, it bypass some limitations of Twitter Official API.
 
-Example on using the twitter_crawler to get specific desired tweeter data on company can be found in 'get_tweets.py'
+Example on using the twitter_crawler to get specific desired tweeter data on company can be found in 
+'get_tweets.py'. 
 
 ## Details
 Twitter Official API has the bother limitation of time constraints, you can't get older tweets than a week. Some tools provide access to older tweets but in the most of them you have to spend some money before.
