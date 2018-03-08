@@ -1,5 +1,12 @@
 # ECE180_Winter2018_Group8
 
+A friendly list for grader -- Files for grading:
+twitter_crawler/get_tweets.py
+twitter_analyzer/get_sentiment_data.py
+stock_crawler/get_stock_data.py
+
+## Introduction
+
 The goal of this project was to compare positive and negative statements posted on twitter and comparing them to effects they could have on the stock market.
 
 ***Beaware if you want to reproduce the result of this project, it may take hours to days to get the twitter data, since the offical API has restriction, we used 'Get-Old-Tweets-Programatically'. If you want to replot the result, all the data is avaliable in this repo.***
@@ -38,6 +45,7 @@ twitter_analyzer
 In the ***readme.md file in each folder***, there are comprehensive guidlines on how to install reuse use the files. All the files and functions are well documented and support 'help' commend.
 
 All the desired data are stored in the following folders.
+
 ```
 twitter_data
 stock_data
@@ -46,4 +54,3 @@ semtiment_data
 
 
 ## Data Visulization
-Visualizaiton Functions are written in Visulization.ipynb, plot.py and piechart.py
