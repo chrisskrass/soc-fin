@@ -80,5 +80,5 @@ def plotHashtags(filename, savePng=True):
     plt.show();
     return
 
-plotHashtags('United_Airlines_Popular_Hashtags_2017-04-04_to_2017-04-13.csv', True)
+plotHashtags('twitter_analyzer/United_Airlines_Popular_Hashtags_2017-04-04_to_2017-04-13.csv', True)
 
