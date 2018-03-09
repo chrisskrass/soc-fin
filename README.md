@@ -52,5 +52,9 @@ stock_data
 semtiment_data
 ```
 
+## Data Visualization
+Data Visualization part code and result are shown in jupyter notebook 'Visualizaton.ipynb'. 
+(We cannot open jupyter notebook online in this Gitlab, so better download for more information)
+for more use for plot functions, you can look at 'compilation tools', 'plot_df.py' and 'piechart.py'.
 
-## Data Visulization
+
