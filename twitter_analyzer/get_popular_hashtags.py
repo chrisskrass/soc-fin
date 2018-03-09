@@ -6,6 +6,7 @@ def get_popularHashtags_unitedairlines():
     """Get the 10 most popular hashtags per day on tweets on
      United Airlines 10000 per day, 
     from 2017-04-04 to 2017-04-14 and save as .cvs files.
+    CSV twittwer crawler files must be in same directory
         :input: None
         :type: None
         :return: None
