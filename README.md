@@ -57,4 +57,6 @@ Data Visualization part code and result are shown in jupyter notebook 'Visualiza
 (We cannot open jupyter notebook online in this Gitlab, so better download for more information)
 for more use for plot functions, you can look at 'compilation tools', 'plot_df.py' and 'piechart.py'.
 
-
+To plot poular hashtag bar graph, use twitter_analyzer/getpopular_hashtags.py.  Execute the
+file with the United_Airlines_2017-04-04 to United_Airlines_2017-04-04  csv's in the same directory.  The outputed
+csv can then executed on using plot_hashtag_bar.py, which will output the plot.
