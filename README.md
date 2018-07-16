@@ -55,5 +55,5 @@ To plot poular hashtag bar graph, use twitter_analyzer/getpopular_hashtags.py.  
 file with the United_Airlines_2017-04-04 to United_Airlines_2017-04-04  csv's in the same directory.  The outputed
 csv can then executed on using plot_hashtag_bar.py, which will output the plot.
 
-This was a group project for ECE 180 - Programming for Data Analysis class. 
+This was a group project for ECE 180 - Programming for Data Analysis class. My contribution was on getting data from Twitter via extending the get-old-tweets library.
 
