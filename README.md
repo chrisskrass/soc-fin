@@ -1,4 +1,4 @@
-# ECE180_Winter2018_Group8
+# Social Effects on Finance
 
 ## Introduction
 
@@ -43,7 +43,7 @@ All the desired data are stored in the following folders.
 ```
 twitter_data
 stock_data
-semtiment_data
+sentiment_data
 ```
 
 ## Data Visualization
@@ -54,3 +54,6 @@ for more use for plot functions, you can look at 'compilation tools', 'plot_df.p
 To plot poular hashtag bar graph, use twitter_analyzer/getpopular_hashtags.py.  Execute the
 file with the United_Airlines_2017-04-04 to United_Airlines_2017-04-04  csv's in the same directory.  The outputed
 csv can then executed on using plot_hashtag_bar.py, which will output the plot.
+
+This was a group project for ECE 180 - Programming for Data Analysis class. 
+
