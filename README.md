@@ -1,23 +1,17 @@
 # ECE180_Winter2018_Group8
 
-***A friendly list for grader -- Files for grading:
-twitter_crawler/get_tweets.py
-twitter_analyzer/get_sentiment_data.py
-stock_crawler/get_stock_data.py***
-
 ## Introduction
 
 The goal of this project was to compare positive and negative statements posted on twitter and comparing them to effects they could have on the stock market.
 
-***Beaware if you want to reproduce the result of this project, it may take hours to days to get the twitter data, since the offical API has restriction, we used 'Get-Old-Tweets-Programatically'. If you want to replot the result, all the data is avaliable in this repo.***
+***Beware if you want to reproduce the result of this project, it may take hours to days to get the twitter data, since the offical API has restriction, we used 'Get-Old-Tweets-Programatically'. If you want to replot the result, all the data is avaliable in this repo.***
 
 Key Events:
 1. Snapchat stock loses $1.3 billion after Kylie Jenner tweet  (Feb 21, 2018)
 2. Elon Musk Sent His Tesla to Space (Feb 6, 2018)
 3. United airlines scandal, beat passenger (April 9, 2017)
 
-
-## Pipline
+## Pipeline
 
 1. Data Acquisition & Preprocessing:
 
